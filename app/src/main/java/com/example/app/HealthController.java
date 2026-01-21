@@ -10,5 +10,10 @@ public class HealthController {
     public String health() {
         return "Application is running";
     }
+
+    @GetMapping("/version")
+    public String version(){
+        return "v1.0";
+    }
 }
 
