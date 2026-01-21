@@ -36,3 +36,8 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
+
+      - name: Deploy application
+        run: |
+          chmod +x deploy.sh
+          ./deploy.sh ${{ secrets.DOCKER_USERNAME }}/ci-cd-app:latest
