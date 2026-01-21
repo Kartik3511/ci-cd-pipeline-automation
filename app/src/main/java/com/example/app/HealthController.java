@@ -13,7 +13,7 @@ public class HealthController {
 
     @GetMapping("/version")
     public String version(){
-        return "v1.0";
+        return "v1.1";
     }
 }
 
