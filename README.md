@@ -7,14 +7,19 @@ Manual build and deployment processes are slow, error-prone, and inconsistent. T
 
 # Architecture Overview
 Developer Pushes Code
+
         ↓
 GitHub Actions (CI)
+
         ↓
 Build & Test (Maven)
+
         ↓
 Docker Image Build
+
         ↓
 Push to Docker Hub
+
         ↓
 Automatic Deployment
 
@@ -40,6 +45,13 @@ Automatic Deployment
 
  mvn spring-boot:run
  GET /health
+
+# Failure Handling & Rollback
+
+- If build or tests fail, the pipeline stops immediately.
+- Docker image is not pushed if build fails.
+- Rollback is achieved by redeploying a previously stable image tag.
+
 
 # Key Features 
 -Automated build & test
