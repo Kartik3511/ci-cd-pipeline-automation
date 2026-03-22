@@ -39,17 +39,20 @@ jobs:
       - name: Build with Maven
         run: |
           cd app
+          chmod +x mvnw
           ./mvnw ${{ env.MAVEN_CLI_OPTS }} clean package -DskipTests
 
       - name: Run tests
         run: |
           cd app
+          chmod +x mvnw
           ./mvnw ${{ env.MAVEN_CLI_OPTS }} test
 
       - name: Generate test report
         if: always()
         run: |
           cd app
+          chmod +x mvnw
           ./mvnw ${{ env.MAVEN_CLI_OPTS }} surefire-report:report-only
 
       - name: Upload JAR artifact
