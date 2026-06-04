@@ -59,6 +59,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Resolve Maven dependencies (pre-populate cache)
+        run: |
+          cd app
+          chmod +x mvnw
+          ./mvnw ${{ env.MAVEN_CLI_OPTS }} dependency:resolve || true
+
       - name: Run dependency security scan
         uses: aquasecurity/trivy-action@master
         with:
