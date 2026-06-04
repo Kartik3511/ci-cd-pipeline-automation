@@ -22,7 +22,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger log = LoggerFactory.getLogger(RateLimitFilter.class);
 
     private static final String  RATE_LIMITED_PATH = "/detect-food";
-    private static final int     MAX_REQUESTS      = 10;
+    private static final int     MAX_REQUESTS      = 20;
     private static final Duration REFILL_PERIOD    = Duration.ofMinutes(1);
 
     // One bucket per IP — expires 1 hour after last access, so memory doesn't grow forever
