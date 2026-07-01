@@ -23,7 +23,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private static final String  RATE_LIMITED_PATH = "/detect-food";
     private static final int     MAX_REQUESTS      = 30;
-    private static final Duration REFILL_PERIOD    = Duration.ofMinutes(1);
+    private static final Duration REFILL_PERIOD    = Duration.ofMinutes(2);
 
     // One bucket per IP — expires 1 hour after last access, so memory doesn't grow forever
     private final Cache<String, Bucket> buckets = Caffeine.newBuilder()
